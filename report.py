@@ -10,9 +10,11 @@ def createHTML(keys, objects):
 	<!DOCTYPE html>
 		<html>
 		<head>
+			<meta charset="utf-8">
 			<title>
-				
+				Результаты сканирования
 			</title>
+			
 
 			<style type="text/css">
 				.block{
@@ -41,24 +43,24 @@ def createHTML(keys, objects):
 
 		</head>
 	<body>
-	<img src='scaing.png' width="1120">
+	<img src='scaning.png' width="1120">
 	<h4>"""
-	message += "Îò÷¸ò ñôîðìèðîâàí (" + time + ")"
+	message += "Время формирования отчёта - (" + time + ")"
 	message += """</h4>
 
 	<table border="1">
 	<tr>
 		<th>
-			×àñòîòà
+			Частота
 		</th>
 		<th>
-			Îðèãèíàë
+			Спектрограмма модельнго сигнала
 		</th>
 		<th>
-			Çàïèñü
+			Спектрограмма записанного сигнала
 		</th>
 		<th>
-			Êîððåëÿöèÿ
+			Диограмма совпадния
 		</th>
 	</tr>
 
@@ -81,7 +83,7 @@ def createHTML(keys, objects):
 			<img src=""" + objects[i] + """ width="320" height="240">
 		</td>
 		<td>
-			<img class="block" src=""" +  keys[i]+ """ width="320" height="240">
+			<img class="block" src=""" + keys[i] + """ width="320" height="240">
 		</td>
 	</tr>
 	"""
@@ -99,17 +101,12 @@ def createHTML(keys, objects):
 
 if __name__ == '__main__':
 	
-	files = os.listdir(".")#ïîëó÷åíèå ñïèñêà ôàéëîâ â òåêóùåé äèðåêòîðèè
-	
-	files.remove("report.pyc")
-	files.remove("original.png")#óäàëåíèå ôàéëîâ, êîòîðûå íå ó÷àñòâóþò â ôîðìèðîâàíèè îò÷¸òà
-	files.remove("scaing.png")
+	files = os.listdir(".")
+
+	files.remove("original.png")
+	files.remove("scaning.png")
 	files.sort()
 	
-	keys = files[0:((len(files))/2)]# Çäåñü èìåíà ôàéëîâ ñ êîðåëÿöèÿìè
-	objects = files[((len(files))/2):len(files)]#Çäåñü èìåíà ôàéëîâ ñ çàïèñÿìè
-
+	keys = files[0:(len(files)//2)]
+	objects = files[(len(files)//2):len(files)]
 	createHTML(keys, objects)
-
-
-	

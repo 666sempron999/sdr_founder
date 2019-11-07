@@ -19,7 +19,7 @@ def magic(name):
 			return "ok"
 
 
-number = len(open('out.txt', "r").readlines()) - 1
+number = len(open('out.txt', "r").readlines())
 
 
 for i in range(0, number):
@@ -35,7 +35,7 @@ for i in range(0, number):
 	
 	if pid is not None:
 		time.sleep(Configurator.RECORD_TIME)
-		print("Процесс " + str(pid[0]) + " вернул результат в файл")
+		print("Процесс {} вернул результат в файл на {} итерации".format(str(pid[0]), i+1))
 		os.kill(pid[0], signal.SIGKILL)
 		
 	else:

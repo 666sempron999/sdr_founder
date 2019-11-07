@@ -20,8 +20,17 @@ WINDOW_OVERLAP = WINDOW_SIZE - WINDOW_STEP
 def get_wave_data(wave_filename):
     sample_rate, wave_data = scipy.io.wavfile.read(wave_filename)
     assert sample_rate == SAMPLE_RATE, sample_rate
-    if isinstance(wave_data[0], numpy.ndarray):  # стерео
-        wave_data = wave_data.mean(1)
+
+    print(wave_filename)
+    print("-----------------")
+
+    try:
+        if isinstance(wave_data[0], numpy.ndarray):  # стерео
+            wave_data = wave_data.mean(1)
+    except IndexError:
+        print('File Format error')
+        return False
+
     return wave_data
 
 def show_specgram(wave_data, name):
@@ -80,15 +89,16 @@ if __name__ == '__main__':
             os.chdir("..")
 
             subprocess.call("mv original.png records/report", shell=True)
-            subprocess.call("cp scaing.png records/report", shell=True)
+            subprocess.call("cp scaning.png records/report", shell=True)
             subprocess.call("cp report.py records/report", shell=True)
 
             os.chdir("records")
-			
 
-        for i in range(0,len(fileList)):
+        for i in range(0, len(fileList)):
 
             d2 = get_wave_data(fileList[i])
+            if d2 is False:
+                continue
             show_specgram(d2, fileList[i])
             fp2 = get_fingerprint(d2)
             compare_fingerprints(fp1, fp2, fileList[i])

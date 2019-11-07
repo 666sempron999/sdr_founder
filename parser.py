@@ -60,7 +60,7 @@ def ParseLog(text):
 	freqList = freqPatern.findall(text)
 	wigthList = freqWidth.findall(text)
 	
-	d = dict(zip(freqList,wigthList))
+	d = dict(zip(freqList, wigthList))
 
 	return d
 
